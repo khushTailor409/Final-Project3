@@ -10,6 +10,12 @@ public abstract class Item {
     public Item(String id, String title, Status status) {
         this.id = String.format("%04d",nextId++);
         this.title = title;
-        this.status = status;
+        this.status = Status.IN_STORE;
+    }
+    public boolean isAvailable() {
+        return status == Status.IN_STORE;
+    }
+    public static enum Status {
+        IN_STORE,BORROWED,LOST
     }
 }
