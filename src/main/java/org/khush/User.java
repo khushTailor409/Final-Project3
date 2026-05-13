@@ -10,7 +10,7 @@ public abstract class User {
 
     public static int nextId = 0;
 
-    public User(String name, List borrowedItems) {
+    public User(String name) {
         this.id = String.format("%04d", nextId++);
         this.name = name;
         this.borrowedItems = new ArrayList<>();
