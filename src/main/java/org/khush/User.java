@@ -1,7 +1,16 @@
 package org.khush;
 
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
+@Getter
+@Setter
 
 public abstract class User {
     protected String id;
