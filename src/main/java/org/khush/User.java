@@ -16,4 +16,16 @@ public abstract class User {
         this.borrowedItems = new ArrayList<>();
     }
 
+    public abstract int getBorrowedLimit();
+
+    public void borrowItem(Item item) throws Exception {
+        if (borrowedItems.size() >= getBorrowedLimit()) {
+            throw new Exception("Borrow limit reached");
+        }
+        borrowedItems.add(item);
+    }
+    public void returnItem(Item item) {
+        borrowedItems.remove(item);
+    }
+
 }
