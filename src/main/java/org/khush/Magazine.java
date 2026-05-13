@@ -1,6 +1,14 @@
 package org.khush;
 
-@
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 
 public class Magazine extends Item{
 
