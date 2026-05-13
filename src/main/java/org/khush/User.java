@@ -1,5 +1,6 @@
 package org.khush;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class User {
@@ -10,8 +11,9 @@ public abstract class User {
     public static int nextId = 0;
 
     public User(String name, List borrowedItems) {
-        this.id = id;
+        this.id = String.format("%04d", nextId++);
         this.name = name;
-        this.borrowedItems = borrowedItems;
+        this.borrowedItems = new ArrayList<>();
     }
+
 }
