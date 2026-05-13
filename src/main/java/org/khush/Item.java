@@ -7,7 +7,7 @@ public abstract class Item {
 
     public static int nextId = 0;
 
-    public Item(String id, String title, Status status) {
+    public Item( String title) {
         this.id = String.format("%04d",nextId++);
         this.title = title;
         this.status = Status.IN_STORE;
