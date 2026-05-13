@@ -1,5 +1,7 @@
 package org.khush;
 
+@
+
 public class Magazine extends Item{
 
     private int issueNumber;
