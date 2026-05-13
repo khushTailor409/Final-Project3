@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class User {
     protected String id;
     protected String name;
-    protected List<> borrowedItems;
+    protected List<Item> borrowedItems;
 
     public static int nextId = 0;
 
