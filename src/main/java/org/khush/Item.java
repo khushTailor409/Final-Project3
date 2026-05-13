@@ -1,6 +1,15 @@
 package org.khush;
 
-public class Item {
-    public String id;
-    public String title;
+public abstract class Item {
+    protected String id;
+    protected String title;
+    protected Status status; // use enum
+
+    public static int nextId = 0;
+
+    public Item(String id, String title, Status status) {
+        this.id = String.format("%04d",nextId++);
+        this.title = title;
+        this.status = status;
+    }
 }
