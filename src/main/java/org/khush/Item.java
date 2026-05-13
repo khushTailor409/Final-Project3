@@ -1,5 +1,14 @@
 package org.khush;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@Getter
+@Setter
+@ToString
+
 public abstract class Item {
     protected String id;
     protected String title;
