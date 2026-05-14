@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Library {
@@ -133,23 +134,53 @@ public class Library {
     public void saveToCsv() throws Exception{
 
     }
-    public void  exportItems(String path) {
+    public void exportItems(String path) {
+
         File file = new File(path);
 
-        try (FileWriter fileWriter = new FileWriter(file)) {
+        try (FileWriter fw = new FileWriter(file)) {
+
             for (Item item : items) {
-                fileWriter.write(item.getClass().getSimpleName() + ",");
-                fileWriter.write(item.getId() + ",");
-                fileWriter.write(item.getTitle() + ",");
-                fileWriter.write(item.getStatus().toString());
-                fileWriter.write("\n");
+
+                if (item instanceof Book) {
+                    Book b = (Book) item;
+
+                    fw.write("BOOK," +
+                            b.getId() + "," +
+                            b.getTitle() + "," +
+                            b.getStatus() + "," +
+                            b.getAuthor() + "," +
+                            b.getIsbn() + "," +
+                            b.getGenre() + "\n");
+
+                }
+                else if (item instanceof DVD) {
+                    DVD d = (DVD) item;
+
+                    fw.write("DVD," +
+                            d.getId() + "," +
+                            d.getTitle() + "," +
+                            d.getStatus() + "," +
+                            d.getDirector() + "," +
+                            d.getDuration() + "\n");
+                }
+                else if (item instanceof Magazine) {
+                    Magazine m = (Magazine) item;
+
+                    fw.write("MAGAZINE," +
+                            m.getId() + "," +
+                            m.getTitle() + "," +
+                            m.getStatus() + "," +
+                            m.getIssueNumber() + "," +
+                            m.getPublisher() + "\n");
+                }
             }
 
         } catch (IOException e) {
-            throw new RuntimeException("Failed to write CSV file", e);
-
+            throw new RuntimeException("EXPORT ITEMS FAILED", e);
         }
     }
+
     public void exportUsers(String path) {
         File file = new File(path);
 
@@ -174,10 +205,46 @@ public class Library {
     }
 
     public void exportAll(String itemsPath, String usersPath) {
-        exportItems();
-        exportUsers();
-
-
+        exportItems(itemsPath);
+        exportUsers(usersPath);
 
 }
+    public void loadItems(String path) {
+
+        File file = new File(path);
+
+        try (Scanner sc = new Scanner(file)) {
+
+            while (sc.hasNextLine()) {
+
+                String[] data = sc.nextLine().split(",");
+
+                if (data.length < 4) continue;
+
+                String type = data[0];
+                String id = data[1];
+                String title = data[2];
+                Item.Status status = Item.Status.valueOf(data[3].trim());
+
+                Item item = null;
+
+                if (type.equals("Book")) {
+                    item = new Book(id, title, status);
+                } else if (type.equals("DVD")) {
+                    item = new DVD(id, title, status);
+                } else if (type.equals("Magazine")) {
+                    item = new Magazine(id, title, status);
+                }
+
+                if (item != null) {
+                    items.add(item);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load items");
+        }
+    }
+
+
 }

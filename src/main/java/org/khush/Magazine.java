@@ -21,4 +21,11 @@ public class Magazine extends Item {
         this.publisher = publisher;
     }
 
+    public int getIssueNumber() {
+        return issueNumber;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
 }

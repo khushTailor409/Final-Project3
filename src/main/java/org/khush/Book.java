@@ -23,6 +23,13 @@ public class Book extends Item{
         this.genre = genre;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
 
     public String getAuthor() {
         return author;
