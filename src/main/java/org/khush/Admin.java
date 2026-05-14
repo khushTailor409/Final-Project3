@@ -48,4 +48,12 @@ public class Admin extends User implements Reportable {
         return report;
     }
 
+    @Override
+    public String reportAllItemsByStatusSections() {
+        String report = "";
+        for (Item.Status status: Item.Status.values()) {
+            report = report + reportItemsByStatus(status) + "\n";
+        }
+        return report;
+    }
 }
