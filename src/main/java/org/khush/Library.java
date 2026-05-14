@@ -20,14 +20,17 @@ public class Library {
 
     //borrow
 
-    public void borrowItem(User user,Item item) throws Exception {
+    public void borrowItem(User user,Item item) throws LibraryOperationException {
 
         if (user == null || item == null) {
             throw new LibraryOperationException("User or item is null");
         }
 
         if (!item.isAvailable()) {
-            throw new Exception("Item is not available");
+            throw new LibraryOperationException("Item is not available");
+        }
+        if (user instanceof Admin) {
+            throw new LibraryOperationException("Admin cannot borrow item");
         }
 
         // student
@@ -44,7 +47,15 @@ public class Library {
                     .count();
 
             if (bookSBorrowed >= user.getBorrowedLimit()) {
-                throw new Exception("student borrow limit reached");
+                throw new LibraryOperationException("student borrow limit reached");
+            }
+        }
+
+        //teacher
+
+        if (user instanceof Teacher) {
+            if (user.getBorrowedItems().size() >= user.getBorrowedLimit()) {
+                throw new LibraryOperationException("Teacher borrow limit reached");
             }
         }
 
@@ -54,13 +65,13 @@ public class Library {
 
     //return
 
-    public void returnItem(User user,Item item) throws Exception {
+    public void returnItem(User user,Item item) throws LibraryOperationException {
 
         if (user == null || item == null) {
-            throw new Exception("User or item is null");
+            throw new LibraryOperationException("User or item is null");
         }
         if (!user.getBorrowedItems().contains(item)) {
-            throw new Exception("user did not borrow this item");
+            throw new LibraryOperationException("user did not borrow this item");
         }
         user.returnItem(item);
         item.setStatus(Item.Status.IN_STORE);
