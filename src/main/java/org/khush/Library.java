@@ -66,11 +66,39 @@ public class Library {
         item.setStatus(Item.Status.IN_STORE);
     }
 
+    //search title stream
+
     public List<Item> searchByTitle(String title) {
         return items.stream()
                 .filter(i -> i.getTitle().equalsIgnoreCase(title))
                 .distinct()
                 .collect(Collectors.toList());
+
+
+    }
+
+    //search author recursive
+
+    public List<Book> searchByAuthor(String author) {
+
+        List<Book> result = new ArrayList<>();
+        searchByAuthorRecursive(author, 0, result);
+        return result;
+    }
+
+    public void searchByAuthorRecursive(String author, int index, List<Book> result){
+
+        if (index >= items.size()) {
+            return;
+        }
+
+        Item current = items.get(index);
+
+        if (current instanceof  Book) {
+            Book book = (Book) current;
+
+            if (book.getA)
+        }
 
 
     }
