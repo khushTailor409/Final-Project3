@@ -298,4 +298,17 @@ public class Library {
             throw new RuntimeException("Failed to load users", e);
         }
     }
+    public void exportAll(String itemsPath, String usersPath) {
+        exportItems("src/main/resources/items.csv");
+        exportUsers("src/main/resources/users.csv");
+    }
+
+    public void loadAll(String itemsPath, String usersPath) {
+        items.clear();
+        users.clear();
+
+        loadItems("src/main/resources/items.csv");
+        loadUsers("src/main/resources/users.csv");
+    }
 }
+
