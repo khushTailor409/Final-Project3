@@ -51,7 +51,19 @@ public class Library {
         item.setStatus(Item.Status.BORROWED);
     }
 
-    i
+    //return
+
+    public void returnItem(User user,Item item) throws Exception {
+
+        if (user == null || item == null) {
+            throw new Exception("User or item is null");
+        }
+        if (!user.getBorrowedItems().contains(item)) {
+            throw new Exception("user did not borrow this item");
+        }
+        user.returnItem(item);
+        item.setStatus(Item.Status.IN_STORE);
+    }
 
 
 
