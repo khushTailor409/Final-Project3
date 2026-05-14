@@ -18,13 +18,14 @@ public class Library {
     public void addUser(User user) {
         users.add(user);
     }
+
     public void addItem(Item item) {
         items.add(item);
     }
 
     //borrow
 
-    public void borrowItem(User user,Item item) throws LibraryOperationException {
+    public void borrowItem(User user, Item item) throws LibraryOperationException {
 
         if (user == null || item == null) {
             throw new LibraryOperationException("User or item is null");
@@ -70,7 +71,7 @@ public class Library {
 
     //return
 
-    public void returnItem(User user,Item item) throws LibraryOperationException {
+    public void returnItem(User user, Item item) throws LibraryOperationException {
 
         if (user == null || item == null) {
             throw new LibraryOperationException("User or item is null");
@@ -102,7 +103,7 @@ public class Library {
         return result;
     }
 
-    public void searchByAuthorRecursive(String author, int index, List<Book> result){
+    public void searchByAuthorRecursive(String author, int index, List<Book> result) {
 
         if (index >= items.size()) {
             return;
@@ -110,7 +111,7 @@ public class Library {
 
         Item current = items.get(index);
 
-        if (current instanceof  Book) {
+        if (current instanceof Book) {
             Book book = (Book) current;
 
             if (book.getAuthor().equalsIgnoreCase(author)) {
@@ -131,9 +132,10 @@ public class Library {
 
     // CSV
 
-    public void saveToCsv() throws Exception{
+    public void saveToCsv() throws Exception {
 
     }
+
     public void exportItems(String path) {
 
         File file = new File(path);
@@ -153,8 +155,7 @@ public class Library {
                             b.getIsbn() + "," +
                             b.getGenre() + "\n");
 
-                }
-                else if (item instanceof DVD) {
+                } else if (item instanceof DVD) {
                     DVD d = (DVD) item;
 
                     fw.write("DVD," +
@@ -163,8 +164,7 @@ public class Library {
                             d.getStatus() + "," +
                             d.getDirector() + "," +
                             d.getDuration() + "\n");
-                }
-                else if (item instanceof Magazine) {
+                } else if (item instanceof Magazine) {
                     Magazine m = (Magazine) item;
 
                     fw.write("MAGAZINE," +
@@ -208,7 +208,8 @@ public class Library {
         exportItems(itemsPath);
         exportUsers(usersPath);
 
-}
+    }
+
     public void loadItems(String path) {
 
         File file = new File(path);
@@ -219,21 +220,33 @@ public class Library {
 
                 String[] data = sc.nextLine().split(",");
 
-                if (data.length < 4) continue;
-
                 String type = data[0];
                 String id = data[1];
                 String title = data[2];
-                Item.Status status = Item.Status.valueOf(data[3].trim());
+
+                Item.Status status = Item.Status.valueOf(data[3]);
 
                 Item item = null;
 
-                if (type.equals("Book")) {
-                    item = new Book(id, title, status);
+                if (type.equals("BOOK")) {
+
+                    String author = data[4];
+                    String isbn = data[5];
+                    String genre = data[6];
+
+                    item = new Book(id, title, status, author, isbn, genre);
                 } else if (type.equals("DVD")) {
-                    item = new DVD(id, title, status);
-                } else if (type.equals("Magazine")) {
-                    item = new Magazine(id, title, status);
+
+                    String director = data[4];
+                    int duration = Integer.parseInt(data[5]);
+
+                    item = new DVD(id, title, status, director, duration);
+                } else if (type.equals("MAGAZINE")) {
+
+                    int issueNumber = Integer.parseInt(data[4]);
+                    String publisher = data[5];
+
+                    item = new Magazine(id, title, status, issueNumber, publisher);
                 }
 
                 if (item != null) {
@@ -242,9 +255,7 @@ public class Library {
             }
 
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load items");
+            throw new RuntimeException("LOAD ITEMS FAILED", e);
         }
     }
-
-
 }

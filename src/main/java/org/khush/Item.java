@@ -2,8 +2,8 @@ package org.khush;
 
 import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Getter
 @Setter
@@ -14,7 +14,9 @@ public abstract class Item {
     protected String title;
     protected Status status; // use enum
 
-    public static int nextId = 0;
+    protected Item(){}
+
+    public static int nextId = 1;
 
     public Item( String title) {
         this.id = String.format("%04d",nextId++);

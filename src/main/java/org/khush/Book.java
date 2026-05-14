@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Getter
@@ -18,6 +19,22 @@ public class Book extends Item{
 
     public Book(String title, String isbn, String author, String genre) {
         super(title);
+        this.isbn = isbn;
+        this.author = author;
+        this.genre = genre;
+    }
+    public Book(String id, String title, Status status, String author, String isbn, String genre) {
+        // This implicitly calls the new 'protected Item()' constructor
+        this.id = id;
+        this.title = title;
+        this.status = status;
+        this.author = author;
+        this.isbn = isbn;
+        this.genre = genre;
+    }
+
+
+    public Book(String isbn, String author, String genre) {
         this.isbn = isbn;
         this.author = author;
         this.genre = genre;
