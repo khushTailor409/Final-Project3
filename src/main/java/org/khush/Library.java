@@ -124,4 +124,10 @@ public class Library {
     public List<Item> getItems() {
         return items;
     }
+
+    // CSV
+
+    public void saveToCsv() throws Exception{
+
+    }
 }
