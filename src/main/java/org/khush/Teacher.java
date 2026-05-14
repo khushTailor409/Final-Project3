@@ -1,6 +1,12 @@
 package org.khush;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 
 public class Teacher extends User{
 
