@@ -5,12 +5,18 @@ import java.util.List;
 
 public class Library {
 
-    private List<User> users;
-    private List<Item> items;
+    private List<User> users = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
-    public Library(List<User> users, List<Item> items) {
-        this.users = new ArrayList<>();
-        this.items = new ArrayList<>();
+    //add
+
+    public void addUser(User user) {
+        users.add(user);
     }
-}
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+
+
 }
