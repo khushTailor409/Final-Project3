@@ -20,7 +20,15 @@ public class Admin extends User implements Reportable {
 
     @Override
     public String reportItemsByStatus(Item.Status status) {
-        if (Library.items == null)
-        return "";
-    }
+
+        List<Item> items = Library.getItems();
+
+        String report = status + "\n";
+
+        for (Item item : items) {
+            if (item.getStatus() == status){
+                report = report + item + "\n";
+            }
+        }
+        return report;
 }

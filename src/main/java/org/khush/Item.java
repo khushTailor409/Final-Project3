@@ -34,6 +34,10 @@ public abstract class Item {
 
 
 
+    public Status getStatus() {
+        return status;
+    }
+
     public enum Status {
         IN_STORE,BORROWED,LOST
     }
