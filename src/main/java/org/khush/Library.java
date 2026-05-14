@@ -204,12 +204,6 @@ public class Library {
         }
     }
 
-    public void exportAll(String itemsPath, String usersPath) {
-        exportItems(itemsPath);
-        exportUsers(usersPath);
-
-    }
-
     public void loadItems(String path) {
 
         File file = new File(path);
@@ -256,6 +250,52 @@ public class Library {
 
         } catch (Exception e) {
             throw new RuntimeException("LOAD ITEMS FAILED", e);
+        }
+    }
+    public void loadUsers(String path) {
+
+        File file = new File(path);
+
+        try (Scanner sc = new Scanner(file)) {
+
+            while (sc.hasNextLine()) {
+
+                String[] data = sc.nextLine().split(",");
+
+                String type = data[0];
+                String id = data[1];
+                String name = data[2];
+
+                List<Item> borrowed = new ArrayList<>();
+
+                for (int i = 3; i < data.length; i++) {
+                    String itemId = data[i];
+
+                    for (Item item : items) {
+                        if (item.getId().equals(itemId)) {
+                            borrowed.add(item);
+                            break;
+                        }
+                    }
+                }
+
+                User user = null;
+
+                if (type.equals("STUDENT")) {
+                    user = new Student(id, name, borrowed);
+                } else if (type.equals("TEACHER")) {
+                    user = new Teacher(id, name, borrowed);
+                } else if (type.equals("ADMIN")) {
+                    user = new Admin(id, name);
+                }
+
+                if (user != null) {
+                    users.add(user);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load users", e);
         }
     }
 }

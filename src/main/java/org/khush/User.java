@@ -14,6 +14,8 @@ public abstract class User {
     protected String name;
     protected List<Item> borrowedItems;
 
+    protected User() {}
+
     public static int nextId = 0;
 
     public User(String name) {
