@@ -286,7 +286,7 @@ public class Library {
                 } else if (type.equals("TEACHER")) {
                     user = new Teacher(id, name, borrowed);
                 } else if (type.equals("ADMIN")) {
-                    user = new Admin(id, name);
+                    user = new Admin(id, name, this);
                 }
 
                 if (user != null) {

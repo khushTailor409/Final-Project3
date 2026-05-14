@@ -18,7 +18,11 @@ public class Admin extends User implements Reportable {
         super(name);
         this.library = library;
     }
-
+    public Admin(String id, String name, Library library) {
+        super(name);
+        this.id = id;
+        this.library = library;
+    }
 
 
     @Override
@@ -59,4 +63,5 @@ public class Admin extends User implements Reportable {
         }
         return report;
     }
+
 }
