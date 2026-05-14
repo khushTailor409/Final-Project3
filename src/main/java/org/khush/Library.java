@@ -150,4 +150,34 @@ public class Library {
 
         }
     }
+    public void exportUsers(String path) {
+        File file = new File(path);
+
+        try (FileWriter fw = new FileWriter(file)) {
+
+            for (User user : users) {
+
+                fw.write(user.getClass().getSimpleName() + ",");
+                fw.write(user.getId() + ",");
+                fw.write(user.getName());
+
+                for (Item item : user.getBorrowedItems()) {
+                    fw.write("," + item.getId());
+                }
+
+                fw.write("\n");
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to export users");
+        }
+    }
+
+    public void exportAll(String itemsPath, String usersPath) {
+        exportItems();
+        exportUsers();
+
+
+
+}
 }
