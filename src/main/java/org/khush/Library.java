@@ -17,6 +17,11 @@ public class Library {
         items.add(item);
     }
 
+    //borrow
+
+    public void borrowItem(User user,Item item) throws Exception {
+
+    }
 
 
 }
