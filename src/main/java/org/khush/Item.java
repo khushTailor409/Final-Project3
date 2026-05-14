@@ -28,6 +28,10 @@ public abstract class Item {
         this.status = status;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public enum Status {
         IN_STORE,BORROWED,LOST
     }

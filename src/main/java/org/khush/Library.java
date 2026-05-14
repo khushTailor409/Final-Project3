@@ -2,6 +2,7 @@ package org.khush;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Library {
 
@@ -65,6 +66,12 @@ public class Library {
         item.setStatus(Item.Status.IN_STORE);
     }
 
+    public List<Item> searchByTitle(String title) {
+        return items.stream()
+                .filter(i -> i.getTitle().equalsIgnoreCase(title))
+                .distinct()
+                .collect(Collectors.toList());
 
 
+    }
 }
