@@ -18,4 +18,9 @@ public class Admin extends User implements Reportable {
         return 10000000;
     }
 
+    @Override
+    public String reportItemsByStatus(Item.Status status) {
+        if (Library.items == null)
+        return "";
+    }
 }
