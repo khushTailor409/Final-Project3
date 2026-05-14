@@ -22,4 +22,8 @@ public class Book extends Item{
         this.author = author;
         this.genre = genre;
     }
+
+    public String getAuthor() {
+        return author;
+    }
 }

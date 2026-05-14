@@ -97,9 +97,19 @@ public class Library {
         if (current instanceof  Book) {
             Book book = (Book) current;
 
-            if (book.getA)
+            if (book.getAuthor().equalsIgnoreCase(author)) {
+                result.add(book);
+            }
         }
+        searchByAuthorRecursive(author, index + 1, result);
 
+    }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }
