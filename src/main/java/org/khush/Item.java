@@ -28,10 +28,13 @@ public abstract class Item {
         this.status = status;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
-
 
     public Status getStatus() {
         return status;

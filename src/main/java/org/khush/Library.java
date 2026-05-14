@@ -1,5 +1,8 @@
 package org.khush;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -129,5 +132,22 @@ public class Library {
 
     public void saveToCsv() throws Exception{
 
+    }
+    public void  exportItems(String path) {
+        File file = new File(path);
+
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            for (Item item : items) {
+                fileWriter.write(item.getClass().getSimpleName() + ",");
+                fileWriter.write(item.getId() + ",");
+                fileWriter.write(item.getTitle() + ",");
+                fileWriter.write(item.getStatus().toString());
+                fileWriter.write("\n");
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to write CSV file", e);
+
+        }
     }
 }
