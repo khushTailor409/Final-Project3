@@ -10,8 +10,12 @@ import java.util.List;
 
 public class Admin extends User implements Reportable {
 
-    public Admin(String name) {
+    private Library library;
+
+
+    public Admin(String name, Library library) {
         super(name);
+        this.library = library;
     }
 
     @Override
@@ -22,7 +26,7 @@ public class Admin extends User implements Reportable {
     @Override
     public String reportItemsByStatus(Item.Status status) {
 
-        List<Item> items = Library.getItems();
+        List<Item> items = library.getItems();
 
         String report = status + "\n";
 
@@ -36,7 +40,12 @@ public class Admin extends User implements Reportable {
 
     @Override
     public String reportAllUsers() {
-        List<User> users = Library.
+        List<User> users = library.getUsers();
+        String report = "USERS\n";
+        for (User user: users) {
+            report = report + user + "\n";
+        }
+        return report;
     }
 
 }
