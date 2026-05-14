@@ -37,5 +37,8 @@ public abstract class User {
     public void returnItem(Item item) {
         borrowedItems.remove(item);
     }
+    public List<Item> getBorrowedItems() {
+        return borrowedItems;
+    }
 
 }

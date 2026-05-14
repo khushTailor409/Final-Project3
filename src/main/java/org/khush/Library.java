@@ -29,11 +29,27 @@ public class Library {
             throw new Exception("Item is not available");
         }
 
+        // student
 
+        if (user instanceof Student) {
 
+            if (!(item instanceof Book)) {
+                throw new LibraryOperationException("student can borrow books");
+            }
+
+            long bookSBorrowed = user.getBorrowedItems()
+                    .stream()
+                    .filter(i -> i instanceof Book)
+                    .count();
+            if (bookSBorrowed >= user.getBorrowedLimit()) {
+                throw new Exception("student borrow limit reached");
+            }
         }
 
+        user.borrowItem(item);
+        item.setStatus(Item.Status.BORROWED);
     }
+
 
 
 }
