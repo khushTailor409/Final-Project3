@@ -8,7 +8,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 
-public class Admin extends User {
+public class Admin extends User implements Reportable {
 
     public Admin(String name) {
         super(name);
@@ -17,4 +17,5 @@ public class Admin extends User {
     public int getBorrowedLimit() {
         return 10000000;
     }
+
 }
