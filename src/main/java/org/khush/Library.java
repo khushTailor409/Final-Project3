@@ -41,6 +41,7 @@ public class Library {
                     .stream()
                     .filter(i -> i instanceof Book)
                     .count();
+
             if (bookSBorrowed >= user.getBorrowedLimit()) {
                 throw new Exception("student borrow limit reached");
             }
@@ -49,6 +50,8 @@ public class Library {
         user.borrowItem(item);
         item.setStatus(Item.Status.BORROWED);
     }
+
+    i
 
 
 

@@ -24,6 +24,10 @@ public abstract class Item {
     public boolean isAvailable() {
         return status == Status.IN_STORE;
     }
+    public void setStatus(Status status){
+        this.status = status;
+    }
+
     public enum Status {
         IN_STORE,BORROWED,LOST
     }
