@@ -13,6 +13,7 @@ public class Admin extends User implements Reportable {
     public Admin(String name) {
         super(name);
     }
+
     @Override
     public int getBorrowedLimit() {
         return 10000000;
@@ -26,9 +27,16 @@ public class Admin extends User implements Reportable {
         String report = status + "\n";
 
         for (Item item : items) {
-            if (item.getStatus() == status){
+            if (item.getStatus() == status) {
                 report = report + item + "\n";
             }
         }
         return report;
+    }
+
+    @Override
+    public String reportAllUsers() {
+        List<User> users = Library.
+    }
+
 }

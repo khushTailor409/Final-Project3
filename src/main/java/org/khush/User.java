@@ -5,12 +5,8 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Getter
-@Setter
+@ToString
 
 public abstract class User {
 
@@ -37,8 +33,20 @@ public abstract class User {
     public void returnItem(Item item) {
         borrowedItems.remove(item);
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public List<Item> getBorrowedItems() {
         return borrowedItems;
     }
 
+    public static int getNextId() {
+        return nextId;
+    }
 }

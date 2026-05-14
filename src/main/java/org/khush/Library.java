@@ -58,9 +58,10 @@ public class Library {
                 throw new LibraryOperationException("Teacher borrow limit reached");
             }
         }
-
-        user.borrowItem(item);
+        user.getBorrowedItems().add(item);
         item.setStatus(Item.Status.BORROWED);
+
+
     }
 
     //return

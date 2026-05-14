@@ -33,7 +33,6 @@ public abstract class Item {
     }
 
 
-
     public Status getStatus() {
         return status;
     }
