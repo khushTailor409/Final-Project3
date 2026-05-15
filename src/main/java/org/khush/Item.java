@@ -2,7 +2,6 @@ package org.khush;
 
 import lombok.*;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Getter
