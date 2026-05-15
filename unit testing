@@ -1,0 +1,89 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.khush.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class MainTest {
+
+    private Library library;
+    private Student student;
+    private Teacher teacher;
+    private Admin admin;
+    private Book javaBook;
+    private DVD inceptionDVD;
+
+    @BeforeEach
+    void setUp() {
+
+        library = new Library();
+
+
+        javaBook = new Book("Java Programming", "12345", "khush tailor", "Tech");
+
+        inceptionDVD = new DVD("Inception", "Christopher Nolan", 148);
+
+        library.addItem(javaBook);
+        library.addItem(inceptionDVD);
+
+
+        student = new Student("khush");
+        teacher = new Teacher("alex");
+        admin = new Admin("aiden", library);
+
+        library.addUser(student);
+        library.addUser(teacher);
+        library.addUser(admin);
+    }
+
+    @Test
+    @DisplayName("Should throw LibraryOperationException when Admin tries to borrow")
+    void testAdminCannotBorrow() {
+
+        assertThrows(LibraryOperationException.class, () -> {
+            library.borrowItem(admin, javaBook);
+        });
+    }
+
+    @Test
+    @DisplayName("Should throw exception when student borrows non-book item")
+    void testStudentBorrowLimit() {
+
+        assertThrows(LibraryOperationException.class, () -> {
+            library.borrowItem(student, inceptionDVD);
+        });
+    }
+
+    @Test
+    @DisplayName("Should find item by title using your search method")
+    void testSearchByTitle() {
+
+        List<Item> results = library.searchByTitle("Java Programming");
+        assertFalse(results.isEmpty());
+        assertEquals("Java Programming", results.get(0).getTitle());
+    }
+
+    @Test
+    @DisplayName("Should correctly update status after a successful borrow")
+    void testBorrowStatusUpdate() throws LibraryOperationException {
+
+        library.borrowItem(teacher, javaBook);
+
+        assertEquals(Item.Status.BORROWED, javaBook.getStatus());
+        assertTrue(teacher.getBorrowedItems().contains(javaBook));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if item is not available")
+    void testItemAvailability() throws LibraryOperationException {
+        library.borrowItem(teacher, javaBook);
+
+
+        assertThrows(LibraryOperationException.class, () -> {
+            library.borrowItem(student, javaBook);
+        });
+    }
