@@ -12,18 +12,16 @@ public class Admin extends User implements Reportable {
 
     private Library library;
 
-
-
     public Admin(String name, Library library) {
         super(name);
         this.library = library;
     }
+
     public Admin(String id, String name, Library library) {
         super(name);
         this.id = id;
         this.library = library;
     }
-
 
     @Override
     public int getBorrowedLimit() {
@@ -32,11 +30,8 @@ public class Admin extends User implements Reportable {
 
     @Override
     public String reportItemsByStatus(Item.Status status) {
-
         List<Item> items = library.getItems();
-
         String report = status + "\n";
-
         for (Item item : items) {
             if (item.getStatus() == status) {
                 report = report + item + "\n";
@@ -63,5 +58,4 @@ public class Admin extends User implements Reportable {
         }
         return report;
     }
-
 }
