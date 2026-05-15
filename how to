@@ -1,0 +1,81 @@
+library Management System
+
+Start The Program
+
+Run the Main class.
+
+The system will automatically:
+- load users from users.csv
+- load items from items.csv
+
+Add Users
+
+Example:
+Student student = new Student("0001", "John", new ArrayList<>());
+Teacher teacher = new Teacher("0002", "Mike", new ArrayList<>());
+
+library.addUser(student);
+library.addUser(teacher);
+
+add Items
+
+Example:
+
+Book book = new Book("Java Basics", "12345", "Smith", "Programming");
+DVD dvd = new DVD("Batman", "Nolan", 120);
+
+library.addItem(book);
+library.addItem(dvd);
+
+Borrow An Item
+
+Example:
+library.borrowItem(student, book);
+
+If successful:
+- item status becomes BORROWED
+
+Return An Item
+
+Example:
+library.returnItem(student, book);
+
+If successful:
+- item status becomes IN_STORE
+
+Search By Title
+
+Example:
+
+List<Item> results = library.searchByTitle("Java");
+
+Search By Author
+
+Example:
+List<Book> books = library.searchByAuthor("Smith");
+
+Export Data To CSV
+
+Example:
+
+library.exportAll(
+    "src/main/resources/items.csv",
+    "src/main/resources/users.csv"
+);
+
+This saves all users and items.
+
+Load Data From CSV
+
+Example:
+library.loadAll(
+    "src/main/resources/items.csv",
+    "src/main/resources/users.csv"
+);
+
+This reloads all saved data.
+
+Possible Item Status
+- IN_STORE
+- BORROWED
+- LOST
